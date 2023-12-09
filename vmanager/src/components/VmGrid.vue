@@ -70,7 +70,20 @@ function capitalize(str) {
             <span class="name">{{entry[key]}}</span>
           </template>
           <template v-else-if="Array.isArray(entry[key])">
-            {{entry[key].map(v => resolve(v).name)}}
+            <td v-for="vm in entry[key]" :key="`_${vm.id}_${vm}`">
+              <span class="badge bg-primary">{{ resolve(vm).name }}</span>
+              <!--________________INTENTO DE SEPARAR POR COLORES POR ESTADO_____________
+              <template v-if="resolve(vm).state === RUNNING">
+                <span class="badge bg-success">{{ resolve(vm).name }}</span>
+              </template>
+              <template v-else-if="resolve(vm).state === STOPPED">
+                <span class="badge bg-danger">{{ resolve(vm).name }}</span>
+              </template>
+              <template v-else-if="resolve(vm).state === SUSPENDED">
+                <span class="badge bg-warning text-dark">{{ resolve(vm).name }}</span>
+              </template>
+              -->
+            </td>
           </template>
           <template v-else>
             {{entry[key]}}
