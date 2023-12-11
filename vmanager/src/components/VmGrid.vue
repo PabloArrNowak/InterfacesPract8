@@ -70,25 +70,31 @@ function capitalize(str) {
             <span class="name">{{entry[key]}}</span>
           </template>
           <template v-else-if="Array.isArray(entry[key])">
-            <td v-for="vm in entry[key]" :key="`_${vm.id}_${vm}`">
-              <span class="badge bg-primary">{{ resolve(vm).name }}</span>
-              <!--________________INTENTO DE SEPARAR POR COLORES POR ESTADO_____________
-              <template v-if="resolve(vm).state === RUNNING">
-                <span class="badge bg-success">{{ resolve(vm).name }}</span>
+            <td>
+              <template v-for="vm in entry[key].slice(0, 4)" :key="`_${vm.id}_${vm}`">
+                <span class="badge bg-primary">{{ resolve(vm).name }}</span>
+                <!--________________INTENTO DE SEPARAR POR COLORES POR ESTADO_____________
+                <template v-if="resolve(vm).state === RUNNING">
+                  <span class="badge bg-success">{{ resolve(vm).name }}</span>
+                </template>
+                <template v-else-if="resolve(vm).state === STOPPED">
+                  <span class="badge bg-danger">{{ resolve(vm).name }}</span>
+                </template>
+                <template v-else-if="resolve(vm).state === SUSPENDED">
+                  <span class="badge bg-warning text-dark">{{ resolve(vm).name }}</span>
+                </template>
+                -->
               </template>
-              <template v-else-if="resolve(vm).state === STOPPED">
-                <span class="badge bg-danger">{{ resolve(vm).name }}</span>
-              </template>
-              <template v-else-if="resolve(vm).state === SUSPENDED">
-                <span class="badge bg-warning text-dark">{{ resolve(vm).name }}</span>
-              </template>
-              -->
+              <template v-if="entry[key].length > 4">
+                <span class="badge bg-info">+{{ entry[key].length - 4 }}</span>
+              </template>            
             </td>
           </template>
           <template v-else>
-            {{entry[key]}}
+            {{ entry[key] }}
           </template>
         </td>
+
       </tr>
     </tbody>
   </table>
