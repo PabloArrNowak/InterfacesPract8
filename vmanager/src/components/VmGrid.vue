@@ -86,7 +86,7 @@ function capitalize(str) {
                 -->
               </template>
               <template v-if="entry[key].length > 4">
-                <span class="badge bg-info">+{{ entry[key].length - 4 }}</span>
+                <span class="badge bg-info" :title="entry[key].slice(4).map(v => resolve(v).name).join(', ')">+{{ entry[key].length - 4 }}</span>
               </template>            
             </td>
           </template>

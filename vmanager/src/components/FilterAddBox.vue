@@ -28,7 +28,7 @@ function send() {
         <input 
           :value="searchKey"
           @input="{ searchKey = $event.target.value; send()}" 
-          type="search" class="form-control" placeholder="Filtrar">
+          type="search" class="form-control" placeholder="Buscar">
         <span class="input-group-text btn-outline-secondary">🔍</span>
         <button type="button" 
           data-bs-toggle="button" 
