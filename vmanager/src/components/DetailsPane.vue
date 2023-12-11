@@ -67,19 +67,19 @@ function list(state) {
   
     <h5>Acciones</h5>
     <div class="btn-group">
-      <button @click="$emit('editVm')" class="btn btn-outline-success">✏️</button>
+      <button @click="$emit('editVm')" class="btn btn-outline-success" :title="'Editar ' + element.name">✏️</button>
 
       <button v-if="element.groups.length" class="btn btn-outline-warning"
-        @click="$emit('filterVm')" >🔬</button>
+        @click="$emit('filterVm')" :title="'Ver grupos que contienen a ' + element.name">🔬</button>
       
       <button v-if="element.state != VmState.RUNNING" class="btn btn-outline-secondary"
-        @click="$emit('setState', VmState.RUNNING)" >▶</button>
+        @click="$emit('setState', VmState.RUNNING)" :title="'Encender ' + element.name">▶</button>
       <button v-if="element.state != VmState.SUSPENDED" class="btn btn-outline-secondary"
-        @click="$emit('setState', VmState.SUSPENDED)">💤</button>
+        @click="$emit('setState', VmState.SUSPENDED)" :title="'Suspender ' + element.name">💤</button>
       <button v-if="element.state != VmState.STOPPED" class="btn btn-outline-secondary"
-        @click="$emit('setState', VmState.STOPPED)">🛑</button>
+        @click="$emit('setState', VmState.STOPPED)" :title="'Parar ' + element.name">🛑</button>
       
-      <button @click="$emit('rmVm')" class="btn btn-outline-danger">🗑️</button>
+      <button @click="$emit('rmVm')" class="btn btn-outline-danger" :title="'Eliminar ' + element.name">🗑️</button>
     </div>
 
     </div>
@@ -114,9 +114,9 @@ function list(state) {
 
     <h5>Acciones</h5>
     <div class="btn-group">
-      <button @click="$emit('editGroup')" class="btn btn-outline-success">✏️</button>
-      <button @click="$emit('filterGroup')" class="btn btn-outline-warning">🔬</button>
-      <button @click="$emit('rmGroup')" class="btn btn-outline-danger">🗑️</button>
+      <button @click="$emit('editGroup')" class="btn btn-outline-success" :title="'Editar ' + element.name">✏️</button>
+      <button @click="$emit('filterGroup')" class="btn btn-outline-warning" :title="'Ver máquinas virtuales dentro de ' + element.name">🔬</button>
+      <button @click="$emit('rmGroup')" class="btn btn-outline-danger" :title="'Eliminar ' + element.name">🗑️</button>
     </div>
   </div>
 </template>
