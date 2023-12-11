@@ -79,7 +79,7 @@ defineExpose({ show });
           <RangeBox :start="vm.ram" id="e-ram" label="ram" :min="0" :max="128" units="Gb" />
           <RangeBox :start="vm.hd" id="e-hdd" label="hdd" :min="0" :max="4 * 1024" :step="256" units="Gb" />
           <RangeBox :start="vm.cpu" id="e-cpu" label="cpu" :min="0" :max="100" units="%" />
-          <RangeBox :start="vm.cores" id="e-cores" label="cores" :min="1" :max="8" units="#" />
+          <RangeBox :start="vm.cores" id="e-cores" label="cores" :min="1" :max="8" units="Cores" />
           <br>
           <IpBox :start="vm.ip" id="e-ip" label="ip" />
           <RangeBox :start="vm.up" id="e-up" label="up" :min="0" :max="1024 * 20" units="Kbps" />
