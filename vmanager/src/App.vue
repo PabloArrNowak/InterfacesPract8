@@ -102,6 +102,18 @@ function rmGroup(id) {
 }
 
 /////
+// Acciones sobre las máquinas de un grupo
+/////
+
+function setStateMany(id, state) {
+  console.log("El grupo a lanzar es", id, selected.value)
+  M.resolve(id).members.forEach(eid => {
+    setState(eid, state)
+  });
+  refresh();
+}
+
+/////
 // Búsqueda y Filtrado
 /////
 
@@ -235,6 +247,9 @@ const switchGroups = (vmId) => {
             @editGroup="edGroup(selected.id)"
             @filterGroup="switchVms(selected.id)"
             @rmGroup="rmGroup(selected.id)"
+            @runVMs="setStateMany(selected.id, M.VmState.RUNNING)"
+            @suspendVMs="setStateMany(selected.id, M.VmState.SUSPENDED)"
+            @stopVMs="setStateMany(selected.id, M.VmState.STOPPED)"
             @setState="state=>setState(selected.id, state)"
           ></DetailsPane>
         </div>

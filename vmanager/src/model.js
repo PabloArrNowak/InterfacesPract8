@@ -432,6 +432,29 @@ function addGroup(g) {
     return newGroup;
 }
 
+
+function runVMs(g) {
+
+}
+
+
+function suspendVMs(g) {
+    state.groups.doWhere(state.groups, o => o == g.id, group => {
+        group.members.forEach(i => {
+            i.state = VmState.SUSPENDED
+        })
+    })
+}
+
+
+function stopVMs(g) {
+    state.groups.doWhere(state.groups, o => o == g.id, group => {
+        group.members.forEach(i => {
+            i.state = VmState.STOPPED
+        })
+    })
+}
+
 // cosas que estarán disponibles desde fuera de este módulo
 // todo lo que NO se mencione aquí es privado (= inaccesible) desde fuera
 // podríamos haber evitado esto añadiendo `export` a todas las funciones "públicas"
@@ -466,6 +489,10 @@ export {
     addGroup,
     setGroup,
     rmGroup,
+
+    runVMs,
+    suspendVMs,
+    stopVMs,
     
     // general
     init, // inicializa el estado; llama para no operar con un modelo vacío

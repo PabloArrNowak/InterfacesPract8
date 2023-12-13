@@ -1,7 +1,7 @@
 <script setup>
 import { resolve, VmState } from '../model.js'
 
-defineEmits(['editVm', 'filterVm', 'rmVm', 'editGroup', 'filterGroup', 'rmGroup', 'setState'])
+defineEmits(['editVm', 'filterVm', 'rmVm', 'editGroup', 'filterGroup', 'rmGroup', 'setState', 'runVMs', 'suspendVMs', 'stopVMs'])
 
 const props = defineProps({
   element: Object
@@ -117,6 +117,11 @@ function list(state) {
       <button @click="$emit('editGroup')" class="btn btn-outline-success" :title="'Editar ' + element.name">✏️</button>
       <button @click="$emit('filterGroup')" class="btn btn-outline-warning" :title="'Ver máquinas virtuales dentro de ' + element.name">🔬</button>
       <button @click="$emit('rmGroup')" class="btn btn-outline-danger" :title="'Eliminar ' + element.name">🗑️</button>
+    </div>
+    <div class="btn-group">
+      <button @click="$emit('runVMs')" class="btn btn-outline-success" :title="'Encender máquinas virtuales dentro de ' + element.name">▶</button>
+      <button @click="$emit('suspendVMs')" class="btn btn-outline-warning" :title="'Suspender máquinas virtuales dentro de ' + element.name">💤</button>
+      <button @click="$emit('stopVMs')" class="btn btn-outline-danger" :title="'Apagar máquinas virtuales dentro de ' + element.name">🛑</button>
     </div>
   </div>
 </template>
