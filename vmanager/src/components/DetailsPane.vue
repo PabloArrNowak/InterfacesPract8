@@ -11,7 +11,9 @@ const emit = defineEmits([
   "setState",
   'runVMs', 
   'suspendVMs', 
-  'stopVMs'
+  'stopVMs',
+  'cloneVm',
+  'cloneGroup'
 ]);
 
 const props = defineProps(["element"]);
@@ -120,13 +122,24 @@ function confirmRemoveGroup() {
       </button>
 
       <button
+        class="btn btn-outline-secondary"
+        @click="$emit('cloneVm')"
+        :title="'Clonar ' + element.name"
+        :disabled="element.state !== VmState.STOPPED"
+      >
+        🐑
+      </button>
+
+      <button
         v-if="element.state != VmState.RUNNING"
         class="btn btn-outline-secondary"
         @click="$emit('setState', VmState.RUNNING)"
+        :disabled="element.state !== VmState.STOPPED"
         :title="'Encender ' + element.name"
       >
         ▶
       </button>
+
       <button
         v-if="element.state != VmState.SUSPENDED"
         class="btn btn-outline-secondary"
@@ -201,6 +214,15 @@ function confirmRemoveGroup() {
       >
         🔬
       </button>
+
+      <button
+        class="btn btn-outline-secondary"
+        @click="$emit('cloneGroup')"
+        :title="'Clonar ' + element.name"
+      >
+        🐑
+      </button>
+
       <button
         @click="confirmRemoveGroup"
         class="btn btn-outline-danger me-3"

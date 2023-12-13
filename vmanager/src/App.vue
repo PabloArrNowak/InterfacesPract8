@@ -113,6 +113,28 @@ function setStateMany(id, state) {
   refresh();
 }
 
+
+function cloneVm(id) {
+  console.log("La máquina a clonar es ", id, selected.value)
+  let mvClon = M.addVm(M.resolve(id))
+  mvClon.name += mvClon.id
+  refresh();
+  return mvClon.id
+}
+
+
+function cloneGroup(gId){
+  console.log("El Grupo a clonar es ", gId, selected.value)
+  let gClon = M.addGroup(M.resolve(gId))
+  gClon.name += gClon.id
+
+  M.resolve(gClon.id).members.forEach(eid => {
+    M.resolve(eid).groups.push(gClon.id)
+  });
+
+  refresh();
+}
+
 /////
 // Búsqueda y Filtrado
 /////
@@ -244,6 +266,8 @@ const switchGroups = (vmId) => {
             @suspendVMs="setStateMany(selected.id, M.VmState.SUSPENDED)"
             @stopVMs="setStateMany(selected.id, M.VmState.STOPPED)"
             @setState="state=>setState(selected.id, state)"
+            @cloneVm="cloneVm(selected.id)"
+            @cloneGroup="cloneGroup(selected.id)"
           ></DetailsPane>
         </div>
       </div>
