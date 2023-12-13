@@ -34,6 +34,9 @@ function refresh() {
   if (selected.value.id != -1) {
     selected.value = M.resolve(selected.value.id);
   }
+  if (filterId != -1) {
+    switchVms(filterId)
+  }
 }
 
 /////
@@ -120,6 +123,7 @@ function setStateMany(id, state) {
 const searchGroupQuery = ref({all: '', fields: []})
 const searchVmQuery = ref({all: '', fields: []})
 const debug = false;
+let filterId = -1;
 
 const vmFilterGroup = ref(null)
 const groupFilterVm = ref(null)
@@ -132,7 +136,8 @@ const switchVms = (groupId) => {
     M.resolve(groupId).members.map(vmId => M.resolve(vmId))
   vmFilterGroup.value = (groupId == -1) ? 
     null :
-    M.resolve(groupId)    
+    M.resolve(groupId)  
+  filterId = groupId;
 }
 
 // muestra sólo grupos con esa vm (o todos con -1)
@@ -144,6 +149,7 @@ const switchGroups = (vmId) => {
   groupFilterVm.value = (vmId == -1) ? 
     null :
     M.resolve(vmId)        
+  filterId = vmId;
 }
 
 </script>
