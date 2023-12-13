@@ -203,7 +203,7 @@ function confirmRemoveGroup() {
       </button>
       <button
         @click="confirmRemoveGroup"
-        class="btn btn-outline-danger"
+        class="btn btn-outline-danger me-3"
         :title="'Eliminar ' + element.name"
       >
         🗑️
